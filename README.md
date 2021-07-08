@@ -22,7 +22,11 @@
 #### 2. Как запустить проект
 Скачать проект из репозитория
 
-Выполнить команду
+Выполнить команды
+```bash
+pip install requirements.txt
+```
+
 ```bash
 python manage.py runserver
 ```
