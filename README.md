@@ -29,14 +29,11 @@ cd venv\Scripts\
 ```
 
 Активировать виртуальное окружение командой
-* На Windows
+
 ```bash
 activate
 ```
-* На Linux
-```bash
-source activate
-```
+
 Вернуться в директорию mediasoft1, запустить проект командой
 
 ```bash
