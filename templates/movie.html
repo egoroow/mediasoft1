@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load ratings %}
+{% block title %}{{ movie.movie_title }}{% endblock %}
+{% block main %}
+     <div class="container">
+         <H3>{{ movie.movie_title }}</H3>
+         <div class="embed-responsive embed-responsive-16by9">
+             <iframe class="embed-responsive-item" src="{{ movie.movie_trailer }}" allowfullscreen></iframe>
+         </div>
+         <div class="d-flex bd-highlight">
+             <div class="p-2 flex-fill bg-dark">
+                 <h5  class="text-white bg-dark">Режиссер</h5>
+                 <a class="text-white bg-dark" href="{% url 'movies:search_producer' movie.movie_producer.producer_id%}">{{ movie.movie_producer }}</a>
+             </div>
+             <div class="p-2 flex-fill bg-dark">
+                 <h5  class="text-white bg-dark">Жанр:</h5>
+                 {% for i in movie.movie_genre.all %}
+                     <a class="text-white bg-dark" href="{% url 'movies:search_genre' i.genre_id %}">{{ i }}</a>
+                 {% endfor %}
+             </div>
+             <div class="p-2 flex-fill bg-dark">
+                 <h5  class="text-white bg-dark">В ролях</h5>
+                 {% for i in movie.movie_actor.all %}
+                     <a class="text-white bg-dark" href="{% url 'movies:search_actor' i.actor_id %}">{{ i }}</a>
+                 {% endfor %}
+             </div>
+             <div class="p-2 flex-fill bg-dark">
+                 <h5  class="text-white bg-dark">Рейтинг</h5>
+                 <p class="text-white bg-dark">{% ratings movie %}</p>
+             </div>
+         </div>
+     </div>
+{% endblock %}

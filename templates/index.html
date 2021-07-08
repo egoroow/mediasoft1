@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}База фильмов{% endblock %}
+{% block main %}
+    <div class="container">
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+        <div class="row">
+            {% for i in movies %}
+                <div class="col-sm">
+                    <div class="card" style="width: 18rem;">
+                      <img src="{{ i.movie_img }}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ i.movie_title }}</h5>
+                        <p class="card-text">Режиссер: {{ i.movie_producer }}</p>
+                        <a href="{% url 'movies:render_movie' i.movie_id %}" class="btn btn-primary">Открыть</a>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'movies:update_movie' i.movie_id %}">Изменить</a>
+                            <a href="{% url 'movies:delete_movie' i.movie_id %}">Удалить</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
