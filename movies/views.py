@@ -4,8 +4,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import UpdateView, DeleteView, View, CreateView
-
-from .models import *
 from movies.forms import *
 # Create your views here.
 
@@ -34,124 +32,24 @@ def search(request, genre_id=None, actor_id=None, producer_id=None):
     return render(request, 'index.html', {'movies': movies, 'error': error})
 
 
-class ActorCreateView(LoginRequiredMixin, CreateView):
+class ModelCreateView(LoginRequiredMixin, CreateView):
     template_name = 'add.html'
-    form_class = ActorForm
     raise_exception = True
 
     def get_success_url(self):
         return reverse_lazy('movies:index')
 
 
-class ActorUpdateView(LoginRequiredMixin,PermissionRequiredMixin, UpdateView):
+class ModelUpdateView(LoginRequiredMixin,PermissionRequiredMixin, UpdateView):
     template_name = 'add.html'
-    model = Actor
-    form_class = ActorForm
     raise_exception = True
 
     def get_success_url(self):
         return reverse_lazy('movies:index')
 
 
-class ActorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class ModelDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     template_name = 'add.html'
-    model = Actor
-    form_class = ActorForm
-    permission_required = 'movies.delete_actor'
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class ProducerCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'add.html'
-    form_class = ProducerForm
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class ProducerUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    template_name = 'add.html'
-    model = Producer
-    form_class = ProducerForm
-    permission_required = 'movies.change_producer'
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class ProducerDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
-    template_name = 'add.html'
-    model = Producer
-    form_class = ProducerForm
-    permission_required = 'movies.delete_producer'
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class GenreCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'add.html'
-    form_class = GenreForm
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class GenreUpdateView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
-    template_name = 'add.html'
-    model = Genre
-    form_class = GenreForm
-    permission_required = 'movies.change_genre'
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class GenreDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
-    template_name = 'add.html'
-    model = Genre
-    form_class = GenreForm
-    permission_required = 'movies.delete_genre'
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class MovieCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'add.html'
-    form_class = MovieForm
-
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class MovieUpdateView(LoginRequiredMixin, PermissionRequiredMixin,UpdateView):
-    template_name = 'add.html'
-    model = Movie
-    form_class = MovieForm
-    permission_required = 'movies.change_movie'
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
-
-
-class MovieDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
-    template_name = 'add.html'
-    model = Movie
-    form_class = MovieForm
-    permission_required = 'movies.delete_movie'
     raise_exception = True
 
     def get_success_url(self):
