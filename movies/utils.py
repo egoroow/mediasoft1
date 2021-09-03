@@ -1,5 +1,6 @@
 from .models import *
 from .forms import *
+from django.urls import reverse_lazy
 
 
 class MovieMixin():
@@ -7,6 +8,7 @@ class MovieMixin():
     model = Movie
     form_class = MovieForm
     raise_exception = True
+    success_url = reverse_lazy('movies:index')
 
 
 class ActorMixin():
@@ -14,6 +16,7 @@ class ActorMixin():
     model = Actor
     form_class = ActorForm
     raise_exception = True
+    success_url = reverse_lazy('movies:index')
 
 
 class ProducerMixin():
@@ -21,6 +24,7 @@ class ProducerMixin():
     model = Producer
     form_class = ProducerForm
     raise_exception = True
+    success_url = reverse_lazy('movies:index')
 
 
 class GenreMixin():
@@ -28,3 +32,4 @@ class GenreMixin():
     model = Genre
     form_class = GenreForm
     raise_exception = True
+    success_url = reverse_lazy('movies:index')
