@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import UpdateView, DeleteView, View, CreateView
 from movies.forms import *
+from .utils import *
 # Create your views here.
 
 
