@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import UpdateView, DeleteView, View, CreateView
 from movies.forms import *
+from .utils import *
 # Create your views here.
 
 
@@ -32,28 +33,60 @@ def search(request, genre_id=None, actor_id=None, producer_id=None):
     return render(request, 'index.html', {'movies': movies, 'error': error})
 
 
-class ModelCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'add.html'
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
+class MovieCreateView(MovieMixin, LoginRequiredMixin, CreateView):
+    success_url = reverse_lazy('movies:index')
 
 
-class ModelUpdateView(LoginRequiredMixin,PermissionRequiredMixin, UpdateView):
-    template_name = 'add.html'
-    raise_exception = True
-
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
+class MovieUpdateView(MovieMixin, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = 'movies.change_movie'
+    success_url = reverse_lazy('movies:index')
 
 
-class ModelDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
-    template_name = 'add.html'
-    raise_exception = True
+class MovieDeleteView(MovieMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = 'movies.delete_movie'
+    success_url = reverse_lazy('movies:index')
 
-    def get_success_url(self):
-        return reverse_lazy('movies:index')
+
+class ActorCreateView(ActorMixin, LoginRequiredMixin, CreateView):
+    success_url = reverse_lazy('movies:index')
+
+
+class ActorUpdateView(ActorMixin, LoginRequiredMixin, UpdateView):
+    permission_required = 'movies.change_actor'
+    success_url = reverse_lazy('movies:index')
+
+
+class ActorDeleteView(ActorMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = 'movies.delete_actor'
+    success_url = reverse_lazy('movies:index')
+
+
+class ProducerCreateView(ProducerMixin, LoginRequiredMixin, CreateView):
+    success_url = reverse_lazy('movies:index')
+
+
+class ProducerUpdateView(ProducerMixin, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = 'movies.change_producer'
+    success_url = reverse_lazy('movies:index')
+
+
+class ProducerDeleteView(ProducerMixin, LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    permission_required = 'movies.delete_producer'
+    success_url = reverse_lazy('movies:index')
+
+
+class GenreCreateView(GenreMixin, LoginRequiredMixin, CreateView):
+    success_url = reverse_lazy('movies:index')
+
+
+class GenreUpdateView(GenreMixin, LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
+    permission_required = 'movies.change_genre'
+    success_url = reverse_lazy('movies:index')
+
+
+class GenreDeleteView(GenreMixin, LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    permission_required = 'movies.delete_genre'
+    success_url = reverse_lazy('movies:index')
 
 
 class LoginView(View):
