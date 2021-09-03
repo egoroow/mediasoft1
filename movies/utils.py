@@ -3,33 +3,33 @@ from .forms import *
 from django.urls import reverse_lazy
 
 
-class MovieMixin():
+class ReverseLazyMixin():
+    success_url = reverse_lazy('movies:index')
+
+
+class MovieMixin(ReverseLazyMixin):
     template_name = 'add.html'
     model = Movie
     form_class = MovieForm
     raise_exception = True
-    success_url = reverse_lazy('movies:index')
 
 
-class ActorMixin():
+class ActorMixin(ReverseLazyMixin):
     template_name = 'add.html'
     model = Actor
     form_class = ActorForm
     raise_exception = True
-    success_url = reverse_lazy('movies:index')
 
 
-class ProducerMixin():
+class ProducerMixin(ReverseLazyMixin):
     template_name = 'add.html'
     model = Producer
     form_class = ProducerForm
     raise_exception = True
-    success_url = reverse_lazy('movies:index')
 
 
-class GenreMixin():
+class GenreMixin(ReverseLazyMixin):
     template_name = 'add.html'
     model = Genre
     form_class = GenreForm
     raise_exception = True
-    success_url = reverse_lazy('movies:index')
