@@ -34,59 +34,51 @@ def search(request, genre_id=None, actor_id=None, producer_id=None):
 
 
 class MovieCreateView(MovieMixin, LoginRequiredMixin, CreateView):
-    success_url = reverse_lazy('movies:index')
+    permission_required = 'movies.add_movie'
 
 
 class MovieUpdateView(MovieMixin, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = 'movies.change_movie'
-    success_url = reverse_lazy('movies:index')
 
 
 class MovieDeleteView(MovieMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = 'movies.delete_movie'
-    success_url = reverse_lazy('movies:index')
 
 
 class ActorCreateView(ActorMixin, LoginRequiredMixin, CreateView):
-    success_url = reverse_lazy('movies:index')
+    permission_required = 'movies.add_actor'
 
 
 class ActorUpdateView(ActorMixin, LoginRequiredMixin, UpdateView):
     permission_required = 'movies.change_actor'
-    success_url = reverse_lazy('movies:index')
 
 
 class ActorDeleteView(ActorMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = 'movies.delete_actor'
-    success_url = reverse_lazy('movies:index')
 
 
 class ProducerCreateView(ProducerMixin, LoginRequiredMixin, CreateView):
-    success_url = reverse_lazy('movies:index')
+    permission_required = 'movies.add_producer'
 
 
 class ProducerUpdateView(ProducerMixin, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = 'movies.change_producer'
-    success_url = reverse_lazy('movies:index')
 
 
 class ProducerDeleteView(ProducerMixin, LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     permission_required = 'movies.delete_producer'
-    success_url = reverse_lazy('movies:index')
 
 
 class GenreCreateView(GenreMixin, LoginRequiredMixin, CreateView):
-    success_url = reverse_lazy('movies:index')
+    permission_required = 'movies.add_genre'
 
 
 class GenreUpdateView(GenreMixin, LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     permission_required = 'movies.change_genre'
-    success_url = reverse_lazy('movies:index')
 
 
 class GenreDeleteView(GenreMixin, LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     permission_required = 'movies.delete_genre'
-    success_url = reverse_lazy('movies:index')
 
 
 class LoginView(View):
